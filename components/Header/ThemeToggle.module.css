@@ -1,0 +1,36 @@
+.toggle {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    width: 40px;
+    height: 40px;
+
+    border: 1px solid var(--color-border);
+    border-radius: 50%;
+
+    background-color: var(--color-surface);
+    color: var(--color-text);
+
+    font-size: 20px;
+    cursor: pointer;
+
+    transition:
+        background-color 250ms ease,
+        border-color 250ms ease,
+        transform 250ms ease;
+}
+
+.toggle:hover {
+    border-color: var(--color-primary);
+    transform: scale(1.05);
+}
+
+.toggle:focus-visible {
+    outline: 2px solid var(--color-primary);
+    outline-offset: 3px;
+}
+
+.toggle:disabled {
+    cursor: default;
+}

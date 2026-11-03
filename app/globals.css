@@ -11,8 +11,8 @@
   --color-primary-hover: #0095ba;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
+
+:root[data-theme="dark"] {
     color-scheme: dark;
 
     --color-text: #f2f4f7;
@@ -23,8 +23,8 @@
     --color-secondary: #b5bdc9;
     --color-primary: #00aad4;
     --color-primary-hover: #0095ba;
-  }
 }
+
 
 *,
 *::before,
@@ -42,9 +42,12 @@ body {
   min-height: 100vh;
   display: flex;
   flex-direction: column;
-  background-color: var(--color-white);
+  background-color: var(--color-background);
   color: var(--color-text);
   font-family: Arial, Helvetica, sans-serif;
+  transition:
+    background-color 0.3s ease,
+    color 0.3s ease;
 }
 
 a {
