@@ -1,0 +1,54 @@
+.catalog {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 84px 0 124px;
+}
+
+.loadMoreWrapper {
+    display: flex;
+    justify-content: center;
+    margin-top: 80px;
+}
+
+.loadMoreButton {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    width: 156px;
+    height: 44px;
+    padding: 12px 0;
+
+    border: 1px solid #00aad4;
+    border-radius: 12px;
+
+    background-color: transparent;
+    color: var(--color-text);
+
+    font-size: 16px;
+    font-weight: 600;
+    line-height: 20px;
+    font-family: inherit;
+    cursor: pointer;
+
+    transition:
+        border-color 200ms ease,
+        color 250ms ease;
+}
+
+.loadMoreButton:hover,
+.loadMoreButton:focus-visible {
+    border-color: #0095ba;
+}
+
+.loadMoreButton:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+.message {
+    margin-top: 80px;
+    text-align: center;
+    color: #101828;
+    font-size: 16px;
+}
