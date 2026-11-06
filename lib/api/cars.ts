@@ -1,5 +1,5 @@
 import { api } from "./api";
-import { CarsResponse } from "@/types/car";
+import type { Car, CarsResponse } from "@/types/car";
 
 
 export interface CarsParams{
@@ -19,4 +19,32 @@ export const fetchCars = async (
         
     });
     return data;
+};
+
+export const fetchCarById = async (id: string): Promise<Car> => {
+    const { data } = await api.get<Car>(`/cars/${id}`);
+
+    return data;
+}
+
+export interface BookingRequest {
+  name: string;
+  email: string;
+  comment: string;
+}
+
+export interface BookingResponse {
+  message: string;
+}
+
+export const createBookingRequest = async (
+  carId: string,
+  booking: BookingRequest
+): Promise<BookingResponse> => {
+  const { data } = await api.post<BookingResponse>(
+    `/cars/${carId}/booking-requests`,
+    booking
+  );
+
+  return data;
 };

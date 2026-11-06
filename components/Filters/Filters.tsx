@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, type SubmitEvent  } from "react";
 import css from "./Filters.module.css";
 
 export interface FilterValues {
@@ -20,19 +20,19 @@ export default function Filters({ onSearch }: FiltersProps) {
     const [minMileage, setMinMileage] = useState("");
     const [maxMileage, setMaxMileage] = useState("");
 
-    const handleSearch = (event: React.SubmitEvent<HTMLFormElement>) => {
+    function handleSearch(event: SubmitEvent <HTMLFormElement>) {
         event.preventDefault();
     
 
         onSearch({
-            brand: brand || undefined,
+            brand: brand.trim() || undefined,
             price: price ? Number(price) : undefined,
             minMileage: minMileage ? Number(minMileage) : undefined,
             maxMileage: maxMileage ? Number(maxMileage) : undefined,
         });
     };
 
-    const handleClear = () => {
+    function handleClear() {
         setBrand("");
         setPrice("");
         setMinMileage("");
@@ -41,7 +41,10 @@ export default function Filters({ onSearch }: FiltersProps) {
     };
 
     return (
-        <form onSubmit={handleSearch} className={css.filters}>
+        <form
+            onSubmit={handleSearch}
+            className={css.filters}
+        >
             <div className={css.field}>
                 <label htmlFor="brand" className={css.label}>Car brand</label>
                 <input
@@ -71,9 +74,13 @@ export default function Filters({ onSearch }: FiltersProps) {
             </div>
 
             <div className={css.field}>
-                <label htmlFor="minMileage" className={css.label}>Car mileage</label>
+                <label
+                    htmlFor="minMileage"
+                    className={css.label}>
+                    Car mileage
+                </label>
                 <input
-                    id="minMilage"
+                    id="minMileage"
                     className={`${css.input} ${css.mileage}`}
                     type="number"
                     min="0"
@@ -84,7 +91,11 @@ export default function Filters({ onSearch }: FiltersProps) {
             </div>
 
             <div className={css.field}>
-                <label htmlFor="maxMileage" className={css.label}>Car mileage / км
+                <label
+                    htmlFor="maxMileage"
+                    className={css.label}
+                >
+                    Car mileage / км
 
                 </label>
                 <input
@@ -99,8 +110,16 @@ export default function Filters({ onSearch }: FiltersProps) {
             </div>
 
             <div className={css.actions}>
-                <button type="submit" className={css.searchButton}>Search</button>
-                <button type="button" className={css.clearButton} onClick={handleClear}>
+                <button
+                    type="submit"
+                    className={css.searchButton}>
+                    Search
+                </button>
+
+                <button
+                    type="button"
+                    className={css.clearButton} onClick={handleClear}
+                >
                     Clear filters
                 </button>
             </div>

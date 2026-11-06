@@ -7,11 +7,15 @@ import CarList from "../CarList/CarList";
 import Filters, {
   type FilterValues,
 } from "@/components/Filters/Filters";
+import EmptyState from "../EmptyState/EmptyState";
+import CatalogLoader from "../CatalogLoader/CatalogLoader";
+
 import css from "./CatalogClient.module.css";
 
 
 export default function CatalogClient() {
     const [filters, setFilters] = useState<FilterValues>({});
+    const [resetKey, setResetKey] = useState(0);
 
 
     const {
@@ -19,6 +23,7 @@ export default function CatalogClient() {
         isPending,
         isError,
         error,
+        isFetching,
         fetchNextPage,
         hasNextPage,
         isFetchingNextPage,
@@ -44,38 +49,49 @@ export default function CatalogClient() {
 
     const cars = data?.pages.flatMap((page) => page.cars) ?? [];
 
+    function handleReset() {
+        setFilters({});
+        setResetKey((prev) => prev + 1);
+    }
+
     return (
         <section className={css.catalog}>
 
-            <Filters onSearch={setFilters} />
+            <Filters
+                key={resetKey}
+                onSearch={setFilters}
+            />
            
-            {isPending ? (
-                <p className={css.message}>Loading cars...</p>
-            ) : isError ? (
-                <p className={css.message}>Error: {error.message}</p>
-            ) : (
-                <>
-                            
-                    {cars.length === 0 ? (
-                        <p className={css.message}>No cars found. Try changing your filters.</p>
-                    ) : (
-                      <CarList cars={cars} />
-                    )}
-                            
-                    {hasNextPage && (
-                        <div className={css.loadMoreWrapper}>
-                            <button
-                            className={css.loadMoreButton}
-                            type="button"
-                            onClick={() => fetchNextPage()}
-                            disabled={isFetchingNextPage}
-                           >
-                            {isFetchingNextPage ? "Loading..." : "Load More"}
-                           </button>
-                        </div>        
-                    )}
-                </>
+             <div className={css.results}>
+        {isError ? (
+          <p className={css.message}>
+            Error: {error.message}
+          </p>
+        ) : (
+          <>
+            {cars.length > 0 && (<CarList cars={cars} />)}
+
+            {!isPending && cars.length === 0 && (
+              <EmptyState onReset={handleReset} />
             )}
-        </section>
-    );
+
+            {!isPending && cars.length > 0 && hasNextPage && (
+              <div className={css.loadMoreWrapper}>
+                <button
+                  className={css.loadMoreButton}
+                  type="button"
+                  onClick={() => fetchNextPage()}
+                  disabled={isFetchingNextPage}
+                >
+                  {isFetchingNextPage ? "Loading..." : "Load More"}
+                </button>
+              </div>
+            )}
+
+            {isFetching && <CatalogLoader />}
+          </>
+        )}
+      </div>
+    </section>
+  );
 }
