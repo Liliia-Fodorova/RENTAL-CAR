@@ -34,15 +34,20 @@ Getting Started
 Requirements: Node.js and npm.
 
 1.Clone the repository: git clone https://github.com:Liliia-Fodorova/RENTAL-CAR.git
+
   cd RENTAL-CAR
 
 2.Install dependencies:
+
   npm install
 
 3.Start the development server:
+
   npm run dev
 
-4.Open http://localhost:3000.
+4.Open 
+
+http://localhost:3000.
 
 API
 
@@ -84,7 +89,7 @@ RentalCar — це вебзастосунок для пошуку та орен�
 - Каталог автомобілів — відображення доступних автомобілів, отриманих із бекенду.
 - Фільтрація — пошук за брендом, ціною та діапазоном пробігу з перевіркою введених значень.
 - Load More — поступове завантаження додаткових автомобілів за допомогою useInfiniteQuery із TanStack    Query з урахуванням активних фільтрів.
-- Детальна сторінка автомобіля — окрема сторінка /catalog/[carId], яка відкривається в новій вкладці     після натискання Read more, фотографія, технічні характеристики, комплектація та умови оренди.
+- Детальна сторінка автомобіля — окрема сторінка /catalog/[carId], яка відкривається в новій вкладці     після натискання Read more,       фотографія, технічні характеристики, комплектація та умови оренди.
 - Форма бронювання — надсилання заявки на бекенд та повідомлення про успішне відправлення.
 - Світла та темна теми — можливість перемикання оформлення інтерфейсу.
 - Back to Top — кнопка для повернення до початку сторінки.
@@ -111,10 +116,14 @@ React Hot Toast
 
 🚀 Встановлення та запуск
 
-1. Клонуйте репозиторій: git clone https://ithub.com:Liliia-Fodorova/RENTAL-CAR.git
-2. Перейдіть до папки проєкту: cd RENTAL-CAR
+1. Клонуйте репозиторій:  git clone https://github.com:Liliia-Fodorova/RENTAL-CAR.git
+ 
+2. Перейдіть до папки проєкту:  cd RENTAL-CAR
+ 
 3. Встановіть залежності: npm install
+ 
 4. Запустіть сервер розробки: npm run dev
+
 5. Відкрийте застосунок у браузері: http://localhost:3000
 
 📖 Використання
