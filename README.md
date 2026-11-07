@@ -33,7 +33,7 @@ Route	              Description
 Getting Started
 Requirements: Node.js and npm.
 
-1.Clone the repository: git clone git@github.com:Liliia-Fodorova/RENTAL-CAR.git
+1.Clone the repository: git clone https://github.com:Liliia-Fodorova/RENTAL-CAR.git
   cd RENTAL-CAR
 
 2.Install dependencies:
@@ -45,19 +45,25 @@ Requirements: Node.js and npm.
 4.Open http://localhost:3000.
 
 API
+
 The application uses the RentalCar API for vehicle listings, available filter values, car details, and booking requests. Filtering and pagination are performed through API requests rather than only filtering the loaded cards in the browser.
 
 Design
+
 The interface is based on the RentalCar Figma design.
 
 Deployment
+
 Vercel: https://rental-car-sepia-seven.vercel.app/.
 
 Author
+
 Liliia Fodorova
+
 GitHub: Liliia-Fodorova
 
 Repository
+
 https://github.com/Liliia-Fodorova/RENTAL-CAR
 
 
@@ -105,7 +111,7 @@ React Hot Toast
 
 🚀 Встановлення та запуск
 
-1. Клонуйте репозиторій: git clone git@github.com:Liliia-Fodorova/RENTAL-CAR.git
+1. Клонуйте репозиторій: git clone https://ithub.com:Liliia-Fodorova/RENTAL-CAR.git
 2. Перейдіть до папки проєкту: cd RENTAL-CAR
 3. Встановіть залежності: npm install
 4. Запустіть сервер розробки: npm run dev
@@ -121,12 +127,18 @@ React Hot Toast
 6.Заповніть форму бронювання та натисніть Send.
 
 🔗 Корисні посилання
-  GitHub: https://github.com/Liliia-Fodorova/RENTAL-CAR
-  Live Demo: https://rental-car-sepia-seven.vercel.app/
-  Swagger document: https://car-rental-api.goit.study/api-docs/#/
+
+  GitHub:  https://github.com/Liliia-Fodorova/RENTAL-CAR
+  
+  Live Demo:  https://rental-car-sepia-seven.vercel.app/
+  
+  Swagger document:  https://car-rental-api.goit.study/api-docs/#/
+  
 
   👩‍💻 Автор
 
 Liliia Fodorova
-GitHub: Liliia-Fodorova
+
+GitHub:  Liliia-Fodorova
+
 Проєкт створено в межах навчання веброзробці в GoIT.
