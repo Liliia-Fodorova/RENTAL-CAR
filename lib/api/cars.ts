@@ -48,3 +48,17 @@ export const createBookingRequest = async (
 
   return data;
 };
+
+export interface CarFiltersResponse {
+    brands: string[];
+    price: {
+        min: number;
+        max: number;
+    };
+}
+
+export const fetchCarFilters = async (): Promise<CarFiltersResponse> => {
+    const { data } = await api.get<CarFiltersResponse>("/cars/filters");
+
+    return data;
+}

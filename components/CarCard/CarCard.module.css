@@ -1,107 +1,13 @@
-/* .card {
-    width: 276px;
-    min-height: 464px;
-    padding: 16px;
-    border-radius: 16px;
-    background-color: #ffffff;
-
-    display: flex;
-    flex-direction: column;
-    gap: 16px;
-}
-
-.image {
-    display: block;
-    width: 100%;
-    height: 268px;
-    object-fit: cover;
-    border-radius: 16px;
-}
-
-.titleRow {
-    display: flex;
-    justify-content: space-between;
-    align-items: baseline;
-    gap: 8px;
-}
-
-.title {
-    margin: 0;
-    font-size: 16px;
-    font-weight: 500;
-    line-height: 20px;
-    color: #101828;
-}
-
-.model {
-    color: #00aad4;
-}
-
-.price {
-    margin: 0;
-    flex-shrink: 0;
-    font-size: 16px;
-    font-weight: 500;
-    line-height: 20px;
-    color: #101828;
-}
-
-.details {
-    padding: 10px;
-    border-radius: 8px;
-    background-color: #f2f4f7;
-    display: flex;
-    flex-direction: column;
-    gap: 4px;
-}
-
-.detailsRow {
-    display: flex;
-    flex-wrap: wrap;
-    align-items: center;
-    gap: 4px;
-    margin: 0;
-    font-size: 12px;
-    line-height: 16px;
-    color: #101828;
-}
-
-.detailsRow span:not(:last-child) {
-    padding-right: 6px;
-    border-right: 1px solid #dadde1;
-}
-
-.button {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 100%;
-    min-height: 44px;
-    margin-top: auto;
-    border-radius: 12px;
-    background-color: #00aad4;
-    color: #ffffff;
-    font-size: 16px;
-    font-weight: 500;
-    text-decoration: none;
-    transition: background-color 200ms ease;
-}
-
-.button:hover,
-.button:focus-visible {
-    background-color: #0095ba;
-} */
-
 .card {
-    width: 276px;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    min-width: 0;
     min-height: 464px;
     padding: 16px;
     border-radius: 16px;
-    background-color: #ffffff;
+    background-color: var(--color-white);
     box-sizing: border-box;
-
-    display: flex;
-    flex-direction: column;
 }
 
 .image {
@@ -121,15 +27,17 @@
 }
 
 .title {
+    min-width: 0;
     margin: 0;
     font-size: 16px;
     font-weight: 500;
     line-height: 20px;
-    color: #101828;
+    color: var(--color-text);
+    overflow-wrap: anywhere;
 }
 
 .model {
-    color: #00aad4;
+    color: var(--color-primary);
 }
 
 .price {
@@ -138,21 +46,20 @@
     font-size: 16px;
     font-weight: 500;
     line-height: 20px;
-    color: #101828;
+    color: var(--color-text);
 }
 
 .details {
-    min-height: 52px;
-    padding: 8px;
-    margin-top: 8px;
-    border-radius: 8px;
-    background-color: #f5f5f5;
-    box-sizing: border-box;
-
     display: flex;
     flex-direction: column;
     justify-content: center;
     gap: 4px;
+
+    min-height: 52px;
+    padding: 8px;
+    margin-top: 8px;
+    border-radius: 8px;
+    background-color: var(--color-surface);
 }
 
 .detailsRow {
@@ -160,15 +67,16 @@
     flex-wrap: wrap;
     align-items: center;
     gap: 6px;
+
     margin: 0;
     font-size: 12px;
     line-height: 16px;
-    color: #101828;
+    color: var(--color-text);
 }
 
 .detailsRow span:not(:last-child) {
     padding-right: 6px;
-    border-right: 1px solid #dadde1;
+    border-right: 1px solid var(--color-border);
 }
 
 .button {
@@ -179,21 +87,66 @@
     width: 100%;
     min-height: 44px;
     margin-top: auto;
+    padding: 10px 16px;
 
+    border: none;
     border-radius: 12px;
-    background-color: #00aad4;
+    background-color: var(--color-primary);
     color: #ffffff;
 
     font-size: 16px;
     font-weight: 600;
     line-height: 20px;
+    text-align: center;
     text-decoration: none;
 
     cursor: pointer;
     transition: background-color 200ms ease;
 }
 
-.button:hover,
+.button:hover {
+    background-color: var(--color-primary-hover);
+}
+
 .button:focus-visible {
-    background-color: #0095ba;
+    outline: 2px solid var(--color-primary);
+    outline-offset: 3px;
+}
+
+
+@media (min-width: 768px) and (max-width: 1199px) {
+    .card {
+        min-height: 440px;
+    }
+
+    .image {
+        height: 250px;
+    }
+}
+
+
+@media (max-width: 767px) {
+    .card {
+        min-height: 0;
+        padding: 16px;
+    }
+
+    .image {
+        height: auto;
+        aspect-ratio: 4 / 3;
+        object-fit: cover;
+    }
+
+    .titleRow {
+        margin-top: 12px;
+    }
+
+    .details {
+        margin-top: 12px;
+        margin-bottom: 24px;
+    }
+
+    .button {
+        min-height: 44px;
+    }
 }

@@ -1,8 +1,9 @@
 "use client";
 
 import { useState } from "react";
-import { fetchCars } from "@/lib/api/cars";
 import { useInfiniteQuery } from "@tanstack/react-query";
+
+import { fetchCars } from "@/lib/api/cars";
 import CarList from "../CarList/CarList";
 import Filters, {
   type FilterValues,
@@ -12,83 +13,133 @@ import CatalogLoader from "../CatalogLoader/CatalogLoader";
 
 import css from "./CatalogClient.module.css";
 
-
 export default function CatalogClient() {
-    const [filters, setFilters] = useState<FilterValues>({});
-    const [resetKey, setResetKey] = useState(0);
+  const [filters, setFilters] = useState<FilterValues>({});
+  const [resetKey, setResetKey] = useState(0);
 
+  const {
+    data,
+    isPending,
+    isError,
+    error,
+    isFetching,
+    isFetchNextPageError,
+    fetchNextPage,
+    hasNextPage,
+    isFetchingNextPage,
+    refetch,
+  } = useInfiniteQuery({
+    queryKey: ["cars", filters],
+    initialPageParam: 1,
 
-    const {
-        data,
-        isPending,
-        isError,
-        error,
-        isFetching,
-        fetchNextPage,
-        hasNextPage,
-        isFetchingNextPage,
-    } = useInfiniteQuery({
-        queryKey: ["cars", filters],
-        initialPageParam: 1,
+    queryFn: ({ pageParam }) =>
+      fetchCars({
+        ...filters,
+        page: pageParam,
+        perPage: 12,
+      }),
 
-        queryFn: ({ pageParam }) =>
-            fetchCars({
-                ...filters,
-                page: pageParam,
-                perPage: 12,
-            }),
-        
-        getNextPageParam: (lastPage) => {
-            if (lastPage.page < lastPage.totalPages) {
-                return lastPage.page + 1;
-            }
+    getNextPageParam: (lastPage) => {
+      const currentPage = Number(lastPage.page);
+      const totalPages = Number(lastPage.totalPages);
 
-            return undefined;
-        },
+      if (
+        !Number.isFinite(currentPage) ||
+        !Number.isFinite(totalPages)
+      ) {
+        console.warn("Invalid pagination response:", lastPage);
+        return undefined;
+      }
+
+      return currentPage < totalPages
+        ? currentPage + 1
+        : undefined;
+    },
+  });
+
+  const cars = data?.pages.flatMap((page) => page.cars) ?? [];
+
+  function handleSearch(nextFilters: FilterValues) {
+    setFilters(nextFilters);
+  }
+
+  function handleReset() {
+    setFilters({});
+    setResetKey((prev) => prev + 1);
+  }
+
+  async function handleLoadMore() {
+    if (!hasNextPage || isFetchingNextPage) return;
+
+    const result = await fetchNextPage();
+
+    const pages = result.data?.pages ?? [];
+    const lastPage = pages.at(-1);
+
+    console.log("Pagination result:", {
+      loadedPages: pages.length,
+      totalCars: pages.flatMap((page) => page.cars).length,
+      currentPage: lastPage?.page,
+      totalPages: lastPage?.totalPages,
+      error: result.error,
     });
+  }
 
-    const cars = data?.pages.flatMap((page) => page.cars) ?? [];
+  return (
+    <section className={css.catalog}>
+      <Filters
+        key={resetKey}
+        onSearch={handleSearch}
+      />
 
-    function handleReset() {
-        setFilters({});
-        setResetKey((prev) => prev + 1);
-    }
+      <div className={css.results}>
+        {isPending ? (
+          <CatalogLoader />
+        ) : isError && cars.length === 0 ? (
+          <div className={css.message} role="alert">
+            <p>
+              Failed to load cars: {error.message}
+            </p>
 
-    return (
-        <section className={css.catalog}>
-
-            <Filters
-                key={resetKey}
-                onSearch={setFilters}
-            />
-           
-             <div className={css.results}>
-        {isError ? (
-          <p className={css.message}>
-            Error: {error.message}
-          </p>
+            <button
+              type="button"
+              onClick={() => refetch()}
+            >
+              Try again
+            </button>
+          </div>
         ) : (
           <>
-            {cars.length > 0 && (<CarList cars={cars} />)}
+            {cars.length > 0 && <CarList cars={cars} />}
 
-            {!isPending && cars.length === 0 && (
+            {cars.length === 0 && (
               <EmptyState onReset={handleReset} />
             )}
 
-            {!isPending && cars.length > 0 && hasNextPage && (
+            {isFetchNextPageError && (
+              <p className={css.message} role="alert">
+                Failed to load more cars. Please try again.
+              </p>
+            )}
+
+            {cars.length > 0 && hasNextPage && (
               <div className={css.loadMoreWrapper}>
                 <button
                   className={css.loadMoreButton}
                   type="button"
-                  onClick={() => fetchNextPage()}
+                  onClick={handleLoadMore}
                   disabled={isFetchingNextPage}
                 >
-                  {isFetchingNextPage ? "Loading..." : "Load More"}
+                  {isFetchingNextPage
+                    ? "Loading..."
+                    : "Load More"}
                 </button>
               </div>
             )}
 
-            {isFetching && <CatalogLoader />}
+            {isFetching &&
+              !isFetchingNextPage &&
+              <CatalogLoader />}
           </>
         )}
       </div>

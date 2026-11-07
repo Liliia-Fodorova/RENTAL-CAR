@@ -9,6 +9,11 @@
   --color-secondary: #8d929a;
   --color-primary: #00aad4;
   --color-primary-hover: #0095ba;
+  --filter-bg: #ffffff;
+  --filter-text: #101828;
+  --filter-muted: #8d929a;
+  --filter-hover: #f2f4f7;
+  --filter-focus: #00aad4;
 }
 
 
@@ -23,6 +28,11 @@
     --color-secondary: #b5bdc9;
     --color-primary: #00aad4;
     --color-primary-hover: #0095ba;
+    --filter-bg: #252b36;
+    --filter-text: #f2f4f7;
+    --filter-muted: #b5bdc9;
+    --filter-hover: #414957;
+    --filter-focus: #00aad4;
 }
 
 
