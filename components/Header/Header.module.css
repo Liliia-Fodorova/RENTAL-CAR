@@ -11,7 +11,7 @@
 }
 
 .container {
-    max-width: 1200px;
+    max-width: 100%;
     min-height: 72px;
     margin: 0 auto;
     padding: 0 16px;
@@ -19,12 +19,13 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
+    gap: 18px;
 }
 
 .logo {
     display: inline-flex;
     align-items: center;
-    font-size: 24px;
+    font-size: 20px;
     font-weight: 700;
     line-height: 1;
     text-decoration: none;
@@ -41,7 +42,7 @@
 .nav {
     display: flex;
     align-items: center;
-    gap: 32px;
+    gap: 22px;
 }
 
 .nav a {
@@ -61,4 +62,49 @@
     display: flex;
     align-items: center;
     gap: 24px;
+}
+
+
+@media screen and (min-width: 768px) {
+  .container {
+    min-height: 72px;
+    padding: 0 24px;
+    gap: 16px;
+  }
+
+  .logo {
+    font-size: 22px;
+  }
+
+  .nav {
+    gap: 24px;
+  }
+
+  .nav a {
+    font-size: 16px;
+  }
+
+  .actions {
+    gap: 16px;
+  }
+}
+
+
+@media screen and (min-width: 1440px) {
+  .container {
+    max-width: 1200px;
+    padding: 0 16px;
+  }
+
+  .logo {
+    font-size: 24px;
+  }
+
+  .nav {
+    gap: 32px;
+  }
+
+  .actions {
+    gap: 24px;
+  }
 }

@@ -16,8 +16,17 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "RentalCar",
-  description: "Find your perfect rental car for any journey.",
+  title: {
+    default: "RentalCar — Find Your Perfect Rental Car",
+    template: "%s | RentalCar",
+  },
+  description:
+    "Discover and rent your perfect car with RentalCar. Explore available vehicles, compare prices, and book your next journey.",
+  applicationName: "RentalCar",
+  robots: {
+    index: true,
+    follow: true,
+  },
 };
 
 export default function RootLayout({ children }: LayoutProps<"/">) {

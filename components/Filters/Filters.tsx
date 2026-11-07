@@ -3,6 +3,7 @@
 import { useState, type SubmitEvent } from "react";
 import { useQuery } from "@tanstack/react-query";
 import Select, { type StylesConfig } from "react-select";
+import toast from "react-hot-toast";
 import { fetchCarFilters } from "@/lib/api/cars";
 import css from "./Filters.module.css";
 
@@ -165,20 +166,41 @@ export default function Filters({ onSearch }: FiltersProps) {
     priceOptions.find((option) => option.value === price) ??
     null;
 
-  function handleSearch(event: SubmitEvent<HTMLFormElement>) {
-    event.preventDefault();
+ function handleSearch(event: SubmitEvent<HTMLFormElement>) {
+  event.preventDefault();
 
-    onSearch({
-      brand: brand.trim() || undefined,
-      price: price ? Number(price) : undefined,
-      minMileage: minMileage
-        ? Number(minMileage)
-        : undefined,
-      maxMileage: maxMileage
-        ? Number(maxMileage)
-        : undefined,
-    });
+  const min = minMileage === "" ? undefined : Number(minMileage);
+  const max = maxMileage === "" ? undefined : Number(maxMileage);
+
+  
+  if (
+    (min !== undefined && (!Number.isFinite(min) || min < 0)) ||
+    (max !== undefined && (!Number.isFinite(max) || max < 0))
+  ) {
+    toast.error("Mileage must be zero or greater.");
+    return;
   }
+
+  
+  if (
+    min !== undefined &&
+    max !== undefined &&
+    min > max
+  ) {
+    toast.error(
+      "Minimum mileage cannot exceed maximum mileage."
+    );
+    return;
+  }
+
+  
+  onSearch({
+    brand: brand.trim() || undefined,
+    price: price ? Number(price) : undefined,
+    minMileage: min,
+    maxMileage: max,
+  });
+}
 
   function handleClear() {
     setBrand("");

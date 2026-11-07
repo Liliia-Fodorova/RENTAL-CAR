@@ -68,23 +68,6 @@ export default function CatalogClient() {
     setResetKey((prev) => prev + 1);
   }
 
-  async function handleLoadMore() {
-    if (!hasNextPage || isFetchingNextPage) return;
-
-    const result = await fetchNextPage();
-
-    const pages = result.data?.pages ?? [];
-    const lastPage = pages.at(-1);
-
-    console.log("Pagination result:", {
-      loadedPages: pages.length,
-      totalCars: pages.flatMap((page) => page.cars).length,
-      currentPage: lastPage?.page,
-      totalPages: lastPage?.totalPages,
-      error: result.error,
-    });
-  }
-
   return (
     <section className={css.catalog}>
       <Filters
@@ -102,8 +85,9 @@ export default function CatalogClient() {
             </p>
 
             <button
-              type="button"
-              onClick={() => refetch()}
+                type="button"
+                className={css.retryButton}
+                onClick={() => refetch()}
             >
               Try again
             </button>
@@ -122,19 +106,32 @@ export default function CatalogClient() {
               </p>
             )}
 
-            {cars.length > 0 && hasNextPage && (
-              <div className={css.loadMoreWrapper}>
-                <button
-                  className={css.loadMoreButton}
-                  type="button"
-                  onClick={handleLoadMore}
-                  disabled={isFetchingNextPage}
-                >
-                  {isFetchingNextPage
-                    ? "Loading..."
-                    : "Load More"}
-                </button>
-              </div>
+           {cars.length > 0 && (
+            <div className={css.loadMoreWrapper}>
+              {hasNextPage ? (
+              <button
+                className={css.loadMoreButton}
+                type="button"
+                onClick={() => fetchNextPage()}
+                disabled={isFetchingNextPage}
+              >
+               {isFetchingNextPage ? "Loading..." : "Load More"}
+              </button>
+          ) : (
+              <button
+                className={css.backToTopButton}
+                type="button"
+                onClick={() => {
+                  window.scrollTo({
+                  top: 0,
+                  behavior: "smooth",
+                 });
+               }}
+              >
+               ↑ Back to top
+              </button>
+             )}
+            </div>
             )}
 
             {isFetching &&

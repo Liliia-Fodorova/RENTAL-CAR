@@ -1,19 +1,19 @@
 .catalog {
     width: 100%;
-    max-width: 1280px;
+    max-width: 100%;
     margin: 0 auto;
-    padding: 84px 24px 124px;
+    padding: 42px 16px 62px;
 }
 
 .results {
     position: relative;
-    min-height: 400px;
+    min-height: 250px;
 }
 
 .loadMoreWrapper {
     display: flex;
     justify-content: center;
-    margin-top: 80px;
+    margin-top: 40px;
 }
 
 .loadMoreButton {
@@ -39,7 +39,7 @@
     transition:
         border-color 200ms ease,
         color 200ms ease,
-        background-color 200ms ease;
+        color 200ms ease;
 }
 
 .loadMoreButton:hover {
@@ -58,44 +58,145 @@
 }
 
 .message {
-    margin: 80px auto;
+    margin: 40px auto;
     text-align: center;
     color: var(--color-text);
-    font-size: 18px;
+    font-size: 16px;
+}
+
+.backToTopButton {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+
+    min-width: 156px;
+    height: 44px;
+    padding: 12px 20px;
+
+    border: 1px solid var(--color-primary);
+    border-radius: 12px;
+
+    background-color: transparent;
+    color: var(--color-text);
+
+    font-size: 16px;
+    font-weight: 600;
+    line-height: 20px;
+
+    cursor: pointer;
+
+    transition:
+        border-color 200ms ease,
+        background-color 200ms ease;
+}
+
+.retryButton {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    min-width: 140px;
+    min-height: 44px;
+    margin: 24px auto 0;
+    padding: 12px 24px;
+
+    border: none;
+    border-radius: 12px;
+
+    background-color: var(--color-primary);
+    color: #ffffff;
+
+    font-size: 16px;
+    font-weight: 600;
+    line-height: 20px;
+
+    cursor: pointer;
+
+    transition:
+        background-color 250ms ease,
+        transform 250ms ease;
+}
+
+.retryButton:hover {
+    background-color: var(--color-primary-hover);
+}
+
+.retryButton:focus-visible {
+    outline: 2px solid var(--color-primary);
+    outline-offset: 3px;
+}
+
+.retryButton:active {
+    transform: scale(0.98);
+}
+
+.retryButton:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+.backToTopButton:hover {
+    border-color: var(--color-primary-hover);
+    background-color: var(--color-surface);
+}
+
+.backToTopButton:focus-visible {
+    outline: 2px solid var(--color-primary);
+    outline-offset: 3px;
 }
 
 
-@media (min-width: 768px) and (max-width: 1199px) {
+@media (prefers-reduced-motion: reduce) {
+    .backToTopButton {
+        transition: none;
+    }
+}
+
+
+@media screen and (min-width: 768px) {
     .catalog {
         max-width: 768px;
         padding: 64px 24px 96px;
+    }
+    
+    .results {
+        min-height: 350px;
     }
 
     .loadMoreWrapper {
         margin-top: 56px;
     }
+
+    .message{
+        margin: 80px auto;
+        font-size: 18px;
+    }
+
+    .backToTopButton {
+        width: 100%;
+        max-width: 240px;
+    }
 }
 
 
-@media (max-width: 767px) {
+@media screen and (min-width: 1440px) {
     .catalog {
-        padding: 40px 16px 64px;
+        max-width: 1264px;
+        padding: 80px 32px 124px;
     }
 
     .results {
-        min-height: 250px;
+        min-height: 400px;
     }
 
     .loadMoreWrapper {
-        margin-top: 40px;
+        margin-top: 80px;
     }
 
     .loadMoreButton {
         width: 156px;
     }
 
-    .message {
-        margin: 40px auto;
-        font-size: 16px;
-    }
+
 }
