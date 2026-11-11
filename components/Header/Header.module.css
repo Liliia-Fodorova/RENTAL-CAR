@@ -3,7 +3,7 @@
     position: sticky;
     top: 0;
     z-index: 1000;
-    background-color: var(--color-surface);
+    background-color: var(--color-white);
     border-bottom: 1px solid var(--color-border);
     transition:
             background-color 0.3s ease,
@@ -12,45 +12,46 @@
 
 .container {
     max-width: 100%;
-    min-height: 72px;
+    min-height: 68px;
     margin: 0 auto;
     padding: 0 16px;
 
     display: flex;
     justify-content: space-between;
     align-items: center;
-    gap: 18px;
+    gap: 12px;
 }
 
 .logo {
     display: inline-flex;
     align-items: center;
-    font-size: 20px;
-    font-weight: 700;
-    line-height: 1;
+    width: 104px;
+    height: 16px;
     text-decoration: none;
+    flex-shrink: 0;
 }
 
-.logoRental {
-    color: var(--color-text);
-}
-
-.logoCar {
-    color: var(--color-primary);
-}
 
 .nav {
     display: flex;
     align-items: center;
-    gap: 22px;
+    gap: 12px;
 }
 
 .nav a {
     font-size: 16px;
     font-weight: 500;
+    line-height: 20px;
+    text-underline-offset: 3px;
     color: var(--color-text);
     text-decoration: none;
     transition: color 250ms ease;
+}  
+
+.nav a.active {
+  color: var(--color-primary);
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
 }
 
 .nav a:hover,
@@ -61,20 +62,16 @@
 .actions {
     display: flex;
     align-items: center;
-    gap: 24px;
+    gap: 12px;
 }
 
 
 @media screen and (min-width: 768px) {
   .container {
-    min-height: 72px;
-    padding: 0 24px;
-    gap: 16px;
+    padding: 0 32px;
   }
 
-  .logo {
-    font-size: 22px;
-  }
+
 
   .nav {
     gap: 24px;
@@ -85,19 +82,16 @@
   }
 
   .actions {
-    gap: 16px;
+    gap: 20px;
   }
 }
 
 
 @media screen and (min-width: 1440px) {
   .container {
-    max-width: 1200px;
-    padding: 0 16px;
-  }
-
-  .logo {
-    font-size: 24px;
+    max-width: 1440px;
+    padding: 0 120px;
+    min-height: 68px;
   }
 
   .nav {

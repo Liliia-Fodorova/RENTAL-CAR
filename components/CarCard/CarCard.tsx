@@ -37,7 +37,7 @@ export default function CarCard({ car }: CarCardProps) {
 
                 <p className={css.detailsRow}>
                     <span>{car.type}</span>
-                    <span>{car.mileage.toLocaleString("en-Us")} км</span>
+                    <span>{car.mileage.toLocaleString("uk-UA")} км</span>
                 </p>
             </div>
 
